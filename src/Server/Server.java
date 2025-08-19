@@ -15,7 +15,6 @@ import java.util.List;
 public class Server {
     private static final int PORTA = 80; //MUDAR DEPOIS
     private static Actions actions = new Actions();
-    private static List<Pessoa> pessoas = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -31,7 +30,7 @@ public class Server {
 
                     String mensagem;
                     while ((mensagem = entrada.readLine()) != null) {
-                        if (mensagem.equalsIgnoreCase("SAIR")) {
+                        if (mensagem.equalsIgnoreCase("sair")) {
                             break;
                         }
 

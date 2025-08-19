@@ -1,10 +1,11 @@
 package Model;
 
-public class Pessoa {
+public abstract class Pessoa {
 
     private String cpf;
     private String nome;
     private String endereco;
+    private String tipo;
 
     public Pessoa(String cpf, String nome, String endereco) {
         this.cpf = cpf;
@@ -36,12 +37,21 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +
                 "cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
                 ", endereco='" + endereco + '\'' +
+                "tipo"+ tipo +
                 '}';
     }
 }

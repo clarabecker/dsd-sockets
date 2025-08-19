@@ -8,13 +8,13 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client {
-    private static final String host = "localhost";
-    private static final int porta = 8080;
+    private static final String HOST = "localhost"; // 192.168.3.81
+    private static final int PORTA = 80;
 
     public static void main(String[] args) {
         System.out.println("Tentando conectar...");
 
-        try (Socket socket = new Socket(host, porta)) {
+        try (Socket socket = new Socket(HOST, PORTA)) {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));

@@ -1,0 +1,55 @@
+package Client;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client {
+    private static final String host = "localhost";
+    private static final int porta = 8080;
+
+    public static void main(String[] args) {
+        System.out.println("Tentando conectar...");
+
+        try (Socket socket = new Socket(host, porta)) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+
+            String mensagem;
+
+            while (true) {
+                System.out.print("Digite uma mensagem para o servidor (ou 'sair' para terminar): ");
+                mensagem = teclado.readLine();
+
+                if (mensagem == null || mensagem.trim().isEmpty()) {
+                    continue;
+                }
+
+                out.println(mensagem);
+
+                if (mensagem.equalsIgnoreCase("sair")) {
+                    System.out.println("Encerrando a conexão.");
+                    break;
+                }
+
+                String resposta = in.readLine();
+                if (resposta != null) {
+                    System.out.println("Servidor: " + resposta);
+                } else {
+                    System.out.println("Servidor desconectou.");
+                    break;
+                }
+            }
+
+        } catch (UnknownHostException e) {
+            System.out.println("Host não encontrado!");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -4,10 +4,7 @@ import Model.Estudante;
 import Model.Pessoa;
 import Model.Professor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public class Actions {
@@ -21,14 +18,34 @@ public class Actions {
         actions.put("UPDATE", this::atualizarPessoas);
     }
 
-    private String atualizarPessoas(String[] strings) {
-        return "Atualizando Pessoa";
+    private String atualizarPessoas(String[] partes) {
+        try{
+            if(partes.length != 5){
+                throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
+            }
+
+            String cpf = partes[1].trim();
+            String nome = partes[2].trim();
+            String endereco = partes[3].trim();
+
+            for(Pessoa pessoa: pessoas){
+                if(pessoa.getCpf().equals(cpf)){
+                    pessoa.setNome(nome);
+                    pessoa.setEndereco(endereco);
+                    return  "Pessoa atualizada com sucesso " + nome;
+                }
+            }
+            throw new NoSuchElementException("Pessoa não encontrada");
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
     }
 
     private String inserirPessoas(String[] partes) {
         try{
-            if(partes.length < 6){
-                return "Erro: Parâmetros insuficientes para INSERT";
+            if(partes.length != 6){
+                throw new IllegalArgumentException("Parâmetros Incompletos para INSERT");
             }
 
             String tipo = partes[1].trim();
@@ -41,13 +58,14 @@ public class Actions {
             }else if (tipo.equalsIgnoreCase("PROFESSOR")){
                 pessoas.add(new Professor(cpf, nome, endereco, partes[5].trim()));
             }else{
-                return "Erro: TIPO DESCONHECIDO";
+                throw new IllegalArgumentException("TIPO DESCONHECIDO");
             }
             return "SUCESSO! " + tipo + " " +  nome + " adicionado.";
         }catch (Exception e){
-            return "Error ao inserir pessoa"+ e.getMessage();
+            return "ERRO "+ e.getMessage();
         }
     }
+
 
 
     protected String actionInput(String message) {

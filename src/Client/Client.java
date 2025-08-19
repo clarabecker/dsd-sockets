@@ -12,13 +12,14 @@ public class Client {
     private static final int PORTA = 80;
 
     public static void main(String[] args) {
-        System.out.println("Tentando conectar...");
+        System.out.println("BUSCANDO CONEXÃO...");
 
         try (Socket socket = new Socket(HOST, PORTA)) {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 
+            System.out.println("CONECTADO!");
             String mensagem;
 
             while (true) {

@@ -16,11 +16,34 @@ public class Actions {
     public Actions() {
         actions.put("INSERT", this::inserirPessoas);        // EM LAMBDA: actions.put("INSERT", partes -> inserirPessoas(partes));
         actions.put("UPDATE", this::atualizarPessoas);
+        actions.put("GET", this::getPessoas);
+    }
+
+    private String getPessoas(String[] partes) {
+        try {
+            if(partes.length != 2){
+                throw new IllegalArgumentException("Parâmetros Incorretos para GETPESSOA");
+            }
+
+            for(Pessoa pessoa : pessoas){
+                if(pessoa.getCpf().isEmpty()){
+                    return "Pessoa não encontrada";
+                }else if(pessoa.getCpf().equals(partes[1])){
+                    return pessoa.getCpf()+";"+pessoa.getNome()+";"+pessoa.getEndereco()+"\n";
+                }
+            }
+            return "Sem pessoas cadastradas";
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+
+        }
+
     }
 
     private String atualizarPessoas(String[] partes) {
         try{
-            if(partes.length != 5){
+            if(partes.length != 4){
                 throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
             }
 
@@ -53,6 +76,10 @@ public class Actions {
             String nome = partes[3].trim();
             String endereco = partes[4].trim();
 
+            if(cpf.length() != 11){
+                throw new IllegalArgumentException("O CPF deve contér 11 digitos");
+            }
+
             if(tipo.equalsIgnoreCase("ESTUDANTE")){
                 pessoas.add(new Estudante(cpf, nome, endereco, partes[5].trim()));
             }else if (tipo.equalsIgnoreCase("PROFESSOR")){
@@ -62,7 +89,7 @@ public class Actions {
             }
             return "SUCESSO! " + tipo + " " +  nome + " adicionado.";
         }catch (Exception e){
-            return "ERRO "+ e.getMessage();
+            return "ERRO: "+ e.getMessage();
         }
     }
 

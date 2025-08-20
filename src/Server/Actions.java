@@ -14,15 +14,17 @@ public class Actions {
             actions = new HashMap<>();
 
     public Actions() {
-        actions.put("INSERT", this::inserirPessoas);        // EM LAMBDA: actions.put("INSERT", partes -> inserirPessoas(partes));
-        actions.put("UPDATE", this::atualizarPessoas);
-        actions.put("GET", this::getPessoas);
+        actions.put("INSERT", this::insertPessoa);        // EM LAMBDA: actions.put("INSERT", partes -> inserirPessoas(partes));
+        actions.put("UPDATE", this::updatePessoa);
+        actions.put("GET", this::getPessoa);
+
     }
 
-    private String getPessoas(String[] partes) {
+
+    private String getPessoa(String[] partes) {
         try {
             if(partes.length != 2){
-                throw new IllegalArgumentException("Parâmetros Incorretos para GETPESSOA");
+                throw new IllegalArgumentException("Parâmetros Incorretos para GET");
             }
 
             for(Pessoa pessoa : pessoas){
@@ -41,7 +43,7 @@ public class Actions {
 
     }
 
-    private String atualizarPessoas(String[] partes) {
+    private String updatePessoa(String[] partes) {
         try{
             if(partes.length != 4){
                 throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
@@ -65,7 +67,7 @@ public class Actions {
         }
     }
 
-    private String inserirPessoas(String[] partes) {
+    private String insertPessoa(String[] partes) {
         try{
             if(partes.length != 6){
                 throw new IllegalArgumentException("Parâmetros Incompletos para INSERT");
@@ -92,7 +94,6 @@ public class Actions {
             return "ERRO: "+ e.getMessage();
         }
     }
-
 
 
     protected String actionInput(String message) {

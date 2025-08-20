@@ -17,9 +17,29 @@ public class Actions {
         actions.put("INSERT", this::insertPessoa);        // EM LAMBDA: actions.put("INSERT", partes -> inserirPessoas(partes));
         actions.put("UPDATE", this::updatePessoa);
         actions.put("GET", this::getPessoa);
-
+        actions.put("DELETE", this::deletePessoa);
     }
+    private String deletePessoa(String[] partes) {
+        try{
+            if(partes.length != 2){
+                throw new IllegalArgumentException("Parâmetros Incorretos para DELETE");
+            }
 
+            if(pessoas.isEmpty()){
+                return "Sem pessoas cadastradas";
+            }
+
+            String cpf = partes[1].trim();
+            boolean removida = pessoas.removeIf(p -> p.getCpf().equals(cpf));
+
+            return removida
+                    ? "Pessoa removida com sucesso"
+                    : "Pessoa não encontrada";
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+    }
 
     private String getPessoa(String[] partes) {
         try {
@@ -27,14 +47,16 @@ public class Actions {
                 throw new IllegalArgumentException("Parâmetros Incorretos para GET");
             }
 
+            if(pessoas.isEmpty()){
+                return "Sem pessoas cadastradas";
+            }
+
             for(Pessoa pessoa : pessoas){
-                if(pessoa.getCpf().isEmpty()){
-                    return "Pessoa não encontrada";
-                }else if(pessoa.getCpf().equals(partes[1])){
+               if(pessoa.getCpf().equals(partes[1].trim())){
                     return pessoa.getCpf()+";"+pessoa.getNome()+";"+pessoa.getEndereco()+"\n";
                 }
             }
-            return "Sem pessoas cadastradas";
+            return "Pessoa não encontrada";
 
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();

@@ -9,7 +9,7 @@ Este trabalho, desenvolvido para a disciplina de Sistemas Paralelos e Distribuí
 
 # Exemplos de testes:
 
-INSERT: INSERT;PROFESSOR;12345678900;João da Silva;Rua B, 123;Matematica
-UPDATE: UPDATE;12345678900;Lucas da Silva;Rua B, 123;
-GET: GET;12345678900
+- INSERT: INSERT;PROFESSOR;12345678900;João da Silva;Rua B, 123;Matematica
+- UPDATE: UPDATE;12345678900;Lucas da Silva;Rua B, 123;
+- GET: GET;12345678900
 

@@ -65,4 +65,15 @@ public class Universidade {
         this.capacidadeAlunos = capacidadeAlunos;
         this.comunidadeAcademica = comunidadeAcademica;
     }
+
+    @Override
+    public String toString() {
+        return "Universidade{" +
+                "ID=" + ID +
+                ", nome='" + nome + '\'' +
+                ", numeroSalas=" + numeroSalas +
+                ", capacidadeAlunos=" + capacidadeAlunos +
+                ", comunidadeAcademica=" + comunidadeAcademica +
+                '}';
+    }
 }

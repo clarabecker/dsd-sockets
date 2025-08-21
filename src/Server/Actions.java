@@ -21,6 +21,31 @@ public class Actions {
         actions.put("GET", this::getPessoa);
         actions.put("DELETE", this::deletePessoa);
         actions.put("INSERT_UNI", this::insertUni);
+        actions.put("GET_UNI", this::getUni);
+    }
+
+    private String getUni(String[] partes) {
+        try {
+            if(partes.length != 2){
+                throw new IllegalArgumentException("Parâmetros Incorretos para GET");
+            }
+
+            if(universidades.isEmpty()){
+                return "Sem universidades cadastradas";
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            for(Universidade u : universidades){
+                if(u.getID().equals(ID)){
+                    return u.getNome()+";"+u.getNumeroSalas()+";"+u.getCapacidadeAlunos()+"\n";
+                }
+            }
+            return "Universidade não encontrada";
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+
+        }
     }
 
     private String insertUni(String[] partes) {
@@ -31,7 +56,7 @@ public class Actions {
 
             Long id = Long.valueOf(partes[1].trim());
             String nome = partes[2].trim();
-            int capacidadeSalas = Integer.parseInt(partes[3].trim());
+            int numeroSalas = Integer.parseInt(partes[3].trim());
             int capacidadeAlunos = Integer.parseInt(partes[4].trim());
 
             for(Universidade u : universidades){
@@ -40,13 +65,16 @@ public class Actions {
                 }
             }
 
-            universidades.add(new Universidade(id, nome, capacidadeSalas, capacidadeAlunos));
+            universidades.add(new Universidade(id, nome, numeroSalas, capacidadeAlunos));
             return "Universidade cadastrado com sucesso";
 
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();
         }
     }
+
+
+
 
     private String deletePessoa(String[] partes) {
         try{

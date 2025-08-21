@@ -3,12 +3,14 @@ package Server;
 import Model.Estudante;
 import Model.Pessoa;
 import Model.Professor;
+import Model.Universidade;
 
 import java.util.*;
 import java.util.function.Function;
 
 public class Actions {
     private static List<Pessoa> pessoas = new ArrayList<>();
+    private static List<Universidade> universidades = new ArrayList<>();
     private Map<String, //Operações --> CRUD
             Function<String[], String>> // É a funcao que recebe as partes[] e retorna a mensagem String
             actions = new HashMap<>();
@@ -18,7 +20,34 @@ public class Actions {
         actions.put("UPDATE", this::updatePessoa);
         actions.put("GET", this::getPessoa);
         actions.put("DELETE", this::deletePessoa);
+        actions.put("INSERT_UNI", this::insertUni);
     }
+
+    private String insertUni(String[] partes) {
+        try{
+            if(partes.length != 5){
+                throw new IllegalArgumentException("Parâmetros Incompletos para INSERT_UNI");
+            }
+
+            Long id = Long.valueOf(partes[1].trim());
+            String nome = partes[2].trim();
+            int capacidadeSalas = Integer.parseInt(partes[3].trim());
+            int capacidadeAlunos = Integer.parseInt(partes[4].trim());
+
+            for(Universidade u : universidades){
+                if(u.getID().equals(id)){
+                    throw new IllegalArgumentException("ID já esta cadastrado");
+                }
+            }
+
+            universidades.add(new Universidade(id, nome, capacidadeSalas, capacidadeAlunos));
+            return "Universidade cadastrado com sucesso";
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+    }
+
     private String deletePessoa(String[] partes) {
         try{
             if(partes.length != 2){
@@ -116,6 +145,8 @@ public class Actions {
             return "ERRO: "+ e.getMessage();
         }
     }
+
+
 
 
     protected String actionInput(String message) {

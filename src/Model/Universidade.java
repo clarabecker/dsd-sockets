@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Universidade {
+    private Long ID;
     private String nome;
     private int numeroSalas;
     private int capacidadeAlunos;
     private List<Pessoa> comunidadeAcademica;
 
-    public Universidade(String nome, int numeroSalas, int capacidadeAlunos) {
+    public Universidade(Long ID, String nome, int numeroSalas, int capacidadeAlunos) {
+        this.ID = ID;
         this.nome=nome;
         this.numeroSalas = numeroSalas;
         this.capacidadeAlunos = capacidadeAlunos;
@@ -44,6 +46,10 @@ public class Universidade {
         }
     }
 
+    public Long getID() {
+        return ID;
+    }
+
     public List<Pessoa> getComunidadeAcademica() {
         return comunidadeAcademica;
     }
@@ -52,13 +58,11 @@ public class Universidade {
         this.comunidadeAcademica = comunidade;
     }
 
-    @Override
-    public String toString() {
-        return "Universidade{" +
-                "nome='" + nome + '\'' +
-                ", numeroSalas=" + numeroSalas +
-                ", capacidadeAlunos=" + capacidadeAlunos +
-                ", comunidadeAcademica=" + comunidadeAcademica +
-                '}';
+    public Universidade(Long ID, String nome, int numeroSalas, int capacidadeAlunos, List<Pessoa> comunidadeAcademica) {
+        this.ID = ID;
+        this.nome = nome;
+        this.numeroSalas = numeroSalas;
+        this.capacidadeAlunos = capacidadeAlunos;
+        this.comunidadeAcademica = comunidadeAcademica;
     }
 }

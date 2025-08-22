@@ -118,25 +118,12 @@ public class ActionsUniversidade {
             Long ID = Long.valueOf(partes[1].trim());
             String cpf = partes[2].trim();
 
-            Pessoa pessoaEncontrada = null;
-            for(Pessoa p: pessoas){
-                if(p.getCpf().equals(cpf)){
-                   pessoaEncontrada = p;
-                   break;
-                }
-            }
-
+            Pessoa pessoaEncontrada = buscarPessoaCPF(cpf);
             if (pessoaEncontrada == null) {
                 return "Pessoa não encontrada";
             }
 
-            Universidade universidadeEncontrada = null;
-            for (Universidade u : universidades) {
-                if (u.getID().equals(ID)) {
-                    universidadeEncontrada = u;
-                    break;
-                }
-            }
+            Universidade universidadeEncontrada = buscarUniversidadeID(ID);
             if (universidadeEncontrada == null) {
                 return "Universidade não cadastrada";
             }
@@ -145,12 +132,60 @@ public class ActionsUniversidade {
                 return "Pessoa já vinculada à universidade";
             }
 
-
             universidadeEncontrada.getComunidadeAcademica().add(pessoaEncontrada);
             return "Pessoa adicionada à universidade com sucesso";
         } catch (Exception e) {
             return "ERRO: " + e.getMessage();
         }
+    }
 
+
+    protected String removePessoaUni(String[] partes) {
+        try{
+            if (partes.length != 3) {
+                throw new IllegalArgumentException("Parâmetros Incorretos para REMOVE_PEOPLE_UNI");
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            String cpf = partes[2].trim();
+
+            Pessoa pessoaEncontrada = buscarPessoaCPF(cpf);
+            if (pessoaEncontrada == null) {
+                return "Pessoa não encontrada";
+            }
+
+           Universidade universidadeEncontrada = buscarUniversidadeID(ID);
+            if (universidadeEncontrada == null) {
+                return "Universidade não cadastrada";
+            }
+
+            if (!universidadeEncontrada.getComunidadeAcademica().contains(pessoaEncontrada)) {
+                return "Pessoa não faz parte da comunidade academica";
+            }
+
+            universidadeEncontrada.getComunidadeAcademica().remove(pessoaEncontrada);
+            return "Pessoa removida da universidade com sucesso";
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+    }
+
+    // AUX PARA COMUNIDADE ACADEMICA
+    private Pessoa buscarPessoaCPF(String cpf){
+        for(Pessoa p: pessoas){
+            if(p.getCpf().equals(cpf)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private Universidade buscarUniversidadeID(Long ID){
+        for (Universidade u : universidades) {
+            if (u.getID().equals(ID)) {
+                return u;
+            }
+        }
+        return null;
     }
 }

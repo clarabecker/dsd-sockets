@@ -31,6 +31,7 @@ public class Client {
                 }
 
                 out.println(mensagem);
+                out.flush();
 
                 if (mensagem.equalsIgnoreCase("sair")) {
                     System.out.println("Encerrando a conexão.");

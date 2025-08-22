@@ -84,4 +84,26 @@ public class ActionsUniversidade {
             return "ERRO: "+ e.getMessage();
         }
     }
+
+    public String deletePessoa(String[] partes) {
+        try{
+            if(partes.length != 2){
+                throw new IllegalArgumentException("Parâmetros Incorretos para DELETE");
+            }
+
+            if(universidades.isEmpty()){
+                return "Nenhuma universidade cadastrada";
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            boolean removida = universidades.removeIf(universidade -> universidade.getID().equals(ID));
+
+            return removida
+                    ? "Universidade removida com sucesso"
+                    : "Universidade não encontrada";
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+    }
 }

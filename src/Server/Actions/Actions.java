@@ -23,6 +23,7 @@ public class Actions {
         actions.put("INSERT_UNI", actionsUniversidade::insertUni);
         actions.put("UPDATE_UNI", actionsUniversidade::updateUni);
         actions.put("GET_UNI", actionsUniversidade::getUni);
+        actions.put("DELETE_UNI", actionsUniversidade::deletePessoa);
     }
 
 

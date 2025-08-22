@@ -170,6 +170,39 @@ public class ActionsUniversidade {
         }
     }
 
+    protected String getPessoaUni(String[] partes) {
+        try {
+            if (partes.length != 3) {
+                throw new IllegalArgumentException("Parâmetros Incorretos para GET_PEOPLE_UNI");
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            String cpf = partes[2].trim();
+
+            Pessoa pessoaEncontrada = buscarPessoaCPF(cpf);
+            if (pessoaEncontrada == null) {
+                return "Pessoa não encontrada";
+            }
+
+            Universidade universidadeEncontrada = buscarUniversidadeID(ID);
+            if (universidadeEncontrada == null) {
+                return "Universidade não cadastrada";
+            }
+
+            if (!universidadeEncontrada.getComunidadeAcademica().contains(pessoaEncontrada)) {
+                return "Pessoa não faz parte da comunidade academica";
+            }
+
+            return "Pessoa: " + pessoaEncontrada.getNome() + " (" + pessoaEncontrada.getTipo()+ ") faz parte da comunidade academica: "+ universidadeEncontrada.getNome();
+
+
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+
+    }
+
     // AUX PARA COMUNIDADE ACADEMICA
     private Pessoa buscarPessoaCPF(String cpf){
         for(Pessoa p: pessoas){
@@ -188,4 +221,6 @@ public class ActionsUniversidade {
         }
         return null;
     }
+
+
 }

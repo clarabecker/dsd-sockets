@@ -97,9 +97,9 @@ public class ActionsPessoas {
             }
 
             if(tipo.equalsIgnoreCase("ESTUDANTE")){
-                pessoas.add(new Estudante(cpf, nome, endereco, partes[5].trim()));
+                pessoas.add(new Estudante(cpf, nome, endereco, tipo, partes[5].trim()));
             }else if (tipo.equalsIgnoreCase("PROFESSOR")){
-                pessoas.add(new Professor(cpf, nome, endereco, partes[5].trim()));
+                pessoas.add(new Professor(cpf, nome, endereco, tipo, partes[5].trim()));
             }else{
                 throw new IllegalArgumentException("TIPO DESCONHECIDO");
             }

@@ -3,8 +3,8 @@ package Model;
 public class Professor extends Pessoa{
     private String disciplina;
 
-    public Professor(String cpf, String nome, String endereco, String disciplina) {
-        super(cpf, nome, endereco);
+    public Professor(String cpf, String nome, String endereco, String tipo, String disciplina) {
+        super(cpf, nome, endereco, tipo);
         this.disciplina = disciplina;
     }
 

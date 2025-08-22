@@ -7,10 +7,11 @@ public abstract class Pessoa {
     private String endereco;
     private String tipo;
 
-    public Pessoa(String cpf, String nome, String endereco) {
+    public Pessoa(String cpf, String nome, String endereco, String tipo) {
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
+        this.tipo = tipo;
     }
 
     public String getCpf() {

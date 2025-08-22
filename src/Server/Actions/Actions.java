@@ -26,6 +26,7 @@ public class Actions {
         actions.put("DELETE_UNI", actionsUniversidade::deletePessoa);
         actions.put("ADD_PESSOA_UNI", actionsUniversidade::addPessoaUni);
         actions.put("REMOVE_PESSOA_UNI", actionsUniversidade::removePessoaUni);
+        actions.put("GET_PESSOA_UNI", actionsUniversidade::getPessoaUni);
     }
 
 

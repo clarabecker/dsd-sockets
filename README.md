@@ -17,3 +17,4 @@ Este trabalho, desenvolvido para a disciplina de Sistemas Paralelos e Distribuí
 - **UPDATE Universidade**: UPDATE_UNI;123;IFC;20;400;
 - **GET Universidade**: GET_UNI;123
 - **DELETE Universidade**: DELETE_UNI;123
+- **ADD PESSOA NA UNIVERSIDADE**: ADD_PESSOA_UNI;123;12345678900

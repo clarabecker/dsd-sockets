@@ -14,4 +14,6 @@ Este trabalho, desenvolvido para a disciplina de Sistemas Paralelos e Distribuí
 - **GET Pessoa**: GET;12345678900
 - **DELETE Pessoa**: DELETE;12345678900
 - **INSERT Universidade**: INSERT_UNI;123;UDESC;25;500
-- **GET Universidade**: GET;123
+- **UPDATE Universidade**: UPDATE_UNI;123;IFC;20;400;
+- **GET Universidade**: GET_UNI;123
+- **DELETE Universidade**: DELETE_UNI;123

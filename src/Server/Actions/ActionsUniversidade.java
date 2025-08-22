@@ -1,9 +1,11 @@
 package Server.Actions;
 
+import Model.Pessoa;
 import Model.Universidade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ActionsUniversidade {
     private static List<Universidade> universidades = new ArrayList<>();
@@ -57,5 +59,29 @@ public class ActionsUniversidade {
         }
     }
 
+    public String updateUni(String[] partes) {
+        try{
+            if(partes.length != 5){
+                throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
+            }
 
+            Long ID = Long.valueOf(partes[1].trim());
+            String nome = partes[2].trim();
+            int numeroSalas = Integer.parseInt(partes[3].trim());
+            int capacidadeAlunos = Integer.parseInt(partes[4].trim());
+
+            for(Universidade u: universidades){
+                if(u.getID().equals(ID)){
+                    u.setNome(nome);
+                    u.setNumeroSalas(numeroSalas);
+                    u.setCapacidadeAlunos(capacidadeAlunos);
+                    return  "Universidade atualizada com sucesso " + nome;
+                }
+            }
+            throw new NoSuchElementException("Universidade não encontrada");
+
+        }catch (Exception e){
+            return "ERRO: "+ e.getMessage();
+        }
+    }
 }

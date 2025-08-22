@@ -24,6 +24,7 @@ public class Actions {
         actions.put("UPDATE_UNI", actionsUniversidade::updateUni);
         actions.put("GET_UNI", actionsUniversidade::getUni);
         actions.put("DELETE_UNI", actionsUniversidade::deletePessoa);
+        actions.put("ADD_PESSOA_UNI", actionsUniversidade::addPessoaUni);
     }
 
 

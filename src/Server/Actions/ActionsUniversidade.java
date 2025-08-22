@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static Server.Actions.ActionsPessoas.pessoas;
+
 public class ActionsUniversidade {
     private static List<Universidade> universidades = new ArrayList<>();
 
@@ -59,7 +61,7 @@ public class ActionsUniversidade {
         }
     }
 
-    public String updateUni(String[] partes) {
+    protected String updateUni(String[] partes) {
         try{
             if(partes.length != 5){
                 throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
@@ -85,7 +87,7 @@ public class ActionsUniversidade {
         }
     }
 
-    public String deletePessoa(String[] partes) {
+    protected String deletePessoa(String[] partes) {
         try{
             if(partes.length != 2){
                 throw new IllegalArgumentException("Parâmetros Incorretos para DELETE");
@@ -105,5 +107,50 @@ public class ActionsUniversidade {
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();
         }
+    }
+
+    protected String addPessoaUni(String[] partes) {
+        try {
+            if (partes.length != 3) {
+                throw new IllegalArgumentException("Parâmetros Incorretos para ADD_PEOPLE_UNI");
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            String cpf = partes[2].trim();
+
+            Pessoa pessoaEncontrada = null;
+            for(Pessoa p: pessoas){
+                if(p.getCpf().equals(cpf)){
+                   pessoaEncontrada = p;
+                   break;
+                }
+            }
+
+            if (pessoaEncontrada == null) {
+                return "Pessoa não encontrada";
+            }
+
+            Universidade universidadeEncontrada = null;
+            for (Universidade u : universidades) {
+                if (u.getID().equals(ID)) {
+                    universidadeEncontrada = u;
+                    break;
+                }
+            }
+            if (universidadeEncontrada == null) {
+                return "Universidade não cadastrada";
+            }
+
+            if (universidadeEncontrada.getComunidadeAcademica().contains(pessoaEncontrada)) {
+                return "Pessoa já vinculada à universidade";
+            }
+
+
+            universidadeEncontrada.getComunidadeAcademica().add(pessoaEncontrada);
+            return "Pessoa adicionada à universidade com sucesso";
+        } catch (Exception e) {
+            return "ERRO: " + e.getMessage();
+        }
+
     }
 }

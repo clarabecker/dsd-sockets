@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ActionsPessoas {
-    private static List<Pessoa> pessoas = new ArrayList<>();
+    protected static List<Pessoa> pessoas = new ArrayList<>();
 
     protected String deletePessoa(String[] partes) {
         try{

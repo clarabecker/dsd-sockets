@@ -9,13 +9,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class Server {
-    private static final int PORTA = 8080; //MUDAR DEPOIS
+    private static final int PORTA = 8080; // Porta do servidor
     private static Actions actions = new Actions();
 
     public static void main(String[] args) {
-
         try (ServerSocket servidor = new ServerSocket(PORTA)) {
             System.out.println("Servidor iniciado na porta " + PORTA);
 
@@ -34,15 +32,25 @@ public class Server {
 
                         System.out.println("Mensagem recebida: " + mensagem);
                         String resposta = actions.actionInput(mensagem);
-                        saida.println(resposta);
+
+                        String[] linhas = resposta.split("\n");
+                        for (String linha : linhas) {
+                            saida.println(linha);
+                        }
+
+                        saida.println("<<END>>");
+                        saida.flush();
                     }
+
+                    System.out.println("Cliente desconectado: " + cliente.getInetAddress().getHostAddress());
+
                 } catch (IOException e) {
                     System.err.println("Erro na comunicação com o cliente: " + e.getMessage());
                 }
             }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

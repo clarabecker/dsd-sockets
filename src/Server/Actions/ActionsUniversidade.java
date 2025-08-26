@@ -206,7 +206,7 @@ public class ActionsUniversidade {
     protected String listPessoasUni(String[] partes) {
         try {
             if (partes.length != 2) {
-                throw new IllegalArgumentException("Parâmetros Incorretos para LIST_PEOPLE_UNI");
+                return "Parâmetros Incorretos para LIST_PESSOA_UNI";
             }
 
             Long ID = Long.valueOf(partes[1].trim());
@@ -221,20 +221,23 @@ public class ActionsUniversidade {
                 return "Nenhuma pessoa vinculada a esta universidade";
             }
 
+            // Construindo a string usando System.lineSeparator()
             StringBuilder sb = new StringBuilder();
             for (Pessoa p : comunidade) {
                 sb.append(p.getNome())
                         .append(" (")
                         .append(p.getTipo())
-                        .append(")\n"); // quebra de linha
+                        .append(")")
+                        .append(System.lineSeparator());
             }
 
-            return sb.toString();
+            return sb.toString().trim(); // remove a última quebra de linha desnecessária
 
         } catch (Exception e) {
             return "ERRO: " + e.getMessage();
         }
     }
+
 
 
     // AUX PARA COMUNIDADE ACADEMICA

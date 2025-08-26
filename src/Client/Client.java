@@ -8,16 +8,16 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client {
-    private static final String HOST = "192.168.4.52"; // 192.168.3.81
-    private static final int PORTA = 80;
+    private static final String HOST = "192.168.4.52"; // IP do servidor
+    private static final int PORTA = 8080;
 
     public static void main(String[] args) {
         System.out.println("BUSCANDO CONEXÃO...");
 
-        try (Socket socket = new Socket(HOST, PORTA)) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        try (Socket socket = new Socket(HOST, PORTA);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))) {
 
             System.out.println("CONECTADO!");
             String mensagem;
@@ -38,12 +38,12 @@ public class Client {
                     break;
                 }
 
-                String resposta = in.readLine();
-                if (resposta != null) {
-                    System.out.println("Servidor: " + resposta);
-                } else {
-                    System.out.println("Servidor desconectou.");
-                    break;
+                String linha;
+                while ((linha = in.readLine()) != null) {
+                    if (linha.equals("<<END>>")) {
+                        break;
+                    }
+                    System.out.println("Servidor: " + linha);
                 }
             }
 

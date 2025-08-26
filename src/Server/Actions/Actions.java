@@ -20,6 +20,7 @@ public class Actions {
         actions.put("UPDATE", actionsPessoas::updatePessoa);
         actions.put("GET", actionsPessoas::getPessoa);
         actions.put("DELETE", actionsPessoas::deletePessoa);
+        actions.put("LIST", actionsPessoas::listPessoas);
         actions.put("INSERT_UNI", actionsUniversidade::insertUni);
         actions.put("UPDATE_UNI", actionsUniversidade::updateUni);
         actions.put("GET_UNI", actionsUniversidade::getUni);

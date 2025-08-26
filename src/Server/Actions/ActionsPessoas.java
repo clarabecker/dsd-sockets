@@ -54,7 +54,6 @@ public class ActionsPessoas {
             return "ERRO: "+ e.getMessage();
 
         }
-
     }
 
     protected String updatePessoa(String[] partes) {
@@ -93,19 +92,51 @@ public class ActionsPessoas {
             String endereco = partes[4].trim();
 
             if(cpf.length() != 11){
-                throw new IllegalArgumentException("O CPF deve contér 11 digitos");
+                throw new IllegalArgumentException("O CPF deve conter 11 digitos");
             }
 
             if(tipo.equalsIgnoreCase("ESTUDANTE")){
                 pessoas.add(new Estudante(cpf, nome, endereco, tipo, partes[5].trim()));
-            }else if (tipo.equalsIgnoreCase("PROFESSOR")){
+            } else if (tipo.equalsIgnoreCase("PROFESSOR")){
                 pessoas.add(new Professor(cpf, nome, endereco, tipo, partes[5].trim()));
-            }else{
+            } else{
                 throw new IllegalArgumentException("TIPO DESCONHECIDO");
             }
+
             return "SUCESSO! " + tipo + " " +  nome + " adicionado.";
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();
+        }
+    }
+
+    // LISTAR TODAS AS PESSOAS
+    protected String listPessoas(String[] partes) {
+        try {
+            if (partes.length != 1) {
+                throw new IllegalArgumentException("Parâmetros Incorretos para LIST");
+            }
+
+            if (pessoas.isEmpty()) {
+                return "0";
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(String.format("%02d", pessoas.size())).append("\n");
+
+            for (Pessoa p : pessoas) {
+                sb.append(p.getCpf())
+                        .append(";")
+                        .append(p.getNome())
+                        .append(";")
+                        .append(p.getEndereco())
+                        .append("\n");
+            }
+
+            return sb.toString().trim();
+
+        } catch (Exception e) {
+            return "ERRO: " + e.getMessage();
         }
     }
 }

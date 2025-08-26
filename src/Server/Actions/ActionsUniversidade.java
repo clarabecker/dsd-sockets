@@ -112,7 +112,7 @@ public class ActionsUniversidade {
     protected String addPessoaUni(String[] partes) {
         try {
             if (partes.length != 3) {
-                throw new IllegalArgumentException("Parâmetros Incorretos para ADD_PEOPLE_UNI");
+                throw new IllegalArgumentException("Parâmetros Incorretos para ADD_PESSOA_UNI");
             }
 
             Long ID = Long.valueOf(partes[1].trim());
@@ -143,7 +143,7 @@ public class ActionsUniversidade {
     protected String removePessoaUni(String[] partes) {
         try{
             if (partes.length != 3) {
-                throw new IllegalArgumentException("Parâmetros Incorretos para REMOVE_PEOPLE_UNI");
+                throw new IllegalArgumentException("Parâmetros Incorretos para REMOVE_PESSOA_UNI");
             }
 
             Long ID = Long.valueOf(partes[1].trim());
@@ -173,7 +173,7 @@ public class ActionsUniversidade {
     protected String getPessoaUni(String[] partes) {
         try {
             if (partes.length != 3) {
-                throw new IllegalArgumentException("Parâmetros Incorretos para GET_PEOPLE_UNI");
+                throw new IllegalArgumentException("Parâmetros Incorretos para GET_PESSOA_UNI");
             }
 
             Long ID = Long.valueOf(partes[1].trim());
@@ -203,6 +203,40 @@ public class ActionsUniversidade {
 
     }
 
+    protected String listPessoasUni(String[] partes) {
+        try {
+            if (partes.length != 2) {
+                throw new IllegalArgumentException("Parâmetros Incorretos para LIST_PEOPLE_UNI");
+            }
+
+            Long ID = Long.valueOf(partes[1].trim());
+            Universidade universidadeEncontrada = buscarUniversidadeID(ID);
+
+            if (universidadeEncontrada == null) {
+                return "Universidade não cadastrada";
+            }
+
+            List<Pessoa> comunidade = universidadeEncontrada.getComunidadeAcademica();
+            if (comunidade.isEmpty()) {
+                return "Nenhuma pessoa vinculada a esta universidade";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (Pessoa p : comunidade) {
+                sb.append(p.getNome())
+                        .append(" (")
+                        .append(p.getTipo())
+                        .append(")\n"); // quebra de linha
+            }
+
+            return sb.toString();
+
+        } catch (Exception e) {
+            return "ERRO: " + e.getMessage();
+        }
+    }
+
+
     // AUX PARA COMUNIDADE ACADEMICA
     private Pessoa buscarPessoaCPF(String cpf){
         for(Pessoa p: pessoas){
@@ -221,6 +255,5 @@ public class ActionsUniversidade {
         }
         return null;
     }
-
 
 }

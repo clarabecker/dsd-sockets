@@ -11,7 +11,7 @@ import java.net.Socket;
 
 
 public class Server {
-    private static final int PORTA = 80; //MUDAR DEPOIS
+    private static final int PORTA = 8080; //MUDAR DEPOIS
     private static Actions actions = new Actions();
 
     public static void main(String[] args) {

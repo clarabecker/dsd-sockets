@@ -5,8 +5,6 @@ Este trabalho, desenvolvido para a disciplina de Sistemas Paralelos e Distribuí
 # Diagrama de Classes 
 <img width="803" height="533" alt="Diagrama DSD" src="https://github.com/user-attachments/assets/826fdb5c-9fbd-481a-9845-230f9cc26fa3" />
 
-# Funcionalidades 
-
 # Exemplos de testes:
 
 - **INSERT Pessoa**: INSERT;PROFESSOR;12345678900;João da Silva;Rua B, 123;Matematica

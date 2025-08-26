@@ -4,6 +4,7 @@
 # Ignorar diretórios de dependências
 node_modules/
 vendor/
+out/
 
 # Ignorar arquivos de configuração do ambiente
 .env

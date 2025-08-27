@@ -35,26 +35,41 @@ public class ActionsPessoas {
 
     protected String getPessoa(String[] partes) {
         try {
-            if(partes.length != 2){
+            if (partes.length != 2) {
                 throw new IllegalArgumentException("Parâmetros Incorretos para GET");
             }
 
-            if(pessoas.isEmpty()){
+            if (pessoas.isEmpty()) {
                 return "Sem pessoas cadastradas";
             }
 
-            for(Pessoa pessoa : pessoas){
-                if(pessoa.getCpf().equals(partes[1].trim())){
-                    return pessoa.getCpf()+";"+pessoa.getNome()+";"+pessoa.getEndereco();
+            for (Pessoa pessoa : pessoas) {
+                if (pessoa.getCpf().equals(partes[1].trim())) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(pessoa.getCpf())
+                            .append(";")
+                            .append(pessoa.getNome())
+                            .append(";")
+                            .append(pessoa.getEndereco());
+
+                    if (pessoa.getTipo().equalsIgnoreCase("ESTUDANTE")) {
+                        Estudante est = (Estudante) pessoa;
+                        sb.append(";").append(est.getMatricula());
+                    } else if (pessoa.getTipo().equalsIgnoreCase("PROFESSOR")) {
+                        Professor prof = (Professor) pessoa;
+                        sb.append(";").append(prof.getDisciplina());
+                    }
+
+                    return sb.toString();
                 }
             }
             return "Pessoa não encontrada";
 
-        }catch (Exception e){
-            return "ERRO: "+ e.getMessage();
-
+        } catch (Exception e) {
+            return "ERRO: " + e.getMessage();
         }
     }
+
 
     protected String updatePessoa(String[] partes) {
         try {

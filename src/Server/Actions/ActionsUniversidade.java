@@ -54,7 +54,7 @@ public class ActionsUniversidade {
             }
 
             universidades.add(new Universidade(id, nome, numeroSalas, capacidadeAlunos));
-            return "Universidade cadastrado com sucesso";
+            return "Universidade cadastrada com sucesso";
 
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();
@@ -87,7 +87,7 @@ public class ActionsUniversidade {
         }
     }
 
-    protected String deletePessoa(String[] partes) {
+    protected String deleteUni(String[] partes) {
         try{
             if(partes.length != 2){
                 throw new IllegalArgumentException("Parâmetros Incorretos para DELETE");

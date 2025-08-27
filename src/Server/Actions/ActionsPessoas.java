@@ -57,8 +57,8 @@ public class ActionsPessoas {
     }
 
     protected String updatePessoa(String[] partes) {
-        try{
-            if(partes.length != 4){
+        try {
+            if (partes.length < 4) {
                 throw new IllegalArgumentException("Parâmetros Incorretos para UPDATE");
             }
 
@@ -66,17 +66,27 @@ public class ActionsPessoas {
             String nome = partes[2].trim();
             String endereco = partes[3].trim();
 
-            for(Pessoa pessoa: pessoas){
-                if(pessoa.getCpf().equals(cpf)){
+            for (Pessoa pessoa : pessoas) {
+                if (pessoa.getCpf().equals(cpf)) {
                     pessoa.setNome(nome);
                     pessoa.setEndereco(endereco);
-                    return  "Pessoa atualizada com sucesso " + nome;
+
+                    if (partes.length == 5) {
+                        if (pessoa.getTipo().equalsIgnoreCase("ESTUDANTE")) {
+                            ((Estudante) pessoa).setMatricula(partes[4].trim());
+                        } else if (pessoa.getTipo().equalsIgnoreCase("PROFESSOR")) {
+                            ((Professor) pessoa).setDisciplina(partes[4].trim());
+                        }
+                    }
+
+                    return "Pessoa atualizada com sucesso";
                 }
             }
+
             throw new NoSuchElementException("Pessoa não encontrada");
 
-        }catch (Exception e){
-            return "ERRO: "+ e.getMessage();
+        } catch (Exception e) {
+            return "ERRO: " + e.getMessage();
         }
     }
 
@@ -110,6 +120,8 @@ public class ActionsPessoas {
     }
 
     // LISTAR TODAS AS PESSOAS
+
+    // LISTAR TODAS AS PESSOAS
     protected String listPessoas(String[] partes) {
         try {
             if (partes.length != 1) {
@@ -129,8 +141,19 @@ public class ActionsPessoas {
                         .append(";")
                         .append(p.getNome())
                         .append(";")
-                        .append(p.getEndereco())
-                        .append("\n");
+                        .append(p.getEndereco());
+
+                if (p.getTipo().equalsIgnoreCase("ESTUDANTE")) {
+                    Estudante est = (Estudante) p;
+                    sb.append(";").append(est.getMatricula());
+                }
+
+                else if (p.getTipo().equalsIgnoreCase("PROFESSOR")) {
+                    Professor prof = (Professor) p;
+                    sb.append(";").append(prof.getDisciplina());
+                }
+
+                sb.append("\n");
             }
 
             return sb.toString().trim();
@@ -139,4 +162,5 @@ public class ActionsPessoas {
             return "ERRO: " + e.getMessage();
         }
     }
+
 }

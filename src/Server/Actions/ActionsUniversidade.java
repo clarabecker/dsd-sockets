@@ -230,7 +230,7 @@ public class ActionsUniversidade {
                         .append(System.lineSeparator());
             }
 
-            return sb.toString().trim(); 
+            return sb.toString().trim();
 
         } catch (Exception e) {
             return "ERRO: " + e.getMessage();

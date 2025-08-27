@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client {
-    private static final String HOST = "192.168.4.52"; // IP do servidor
+    private static final String HOST = "localhost"; // IP do servidor
     private static final int PORTA = 8080;
 
     public static void main(String[] args) {

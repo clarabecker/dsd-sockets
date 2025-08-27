@@ -221,7 +221,6 @@ public class ActionsUniversidade {
                 return "Nenhuma pessoa vinculada a esta universidade";
             }
 
-            // Construindo a string usando System.lineSeparator()
             StringBuilder sb = new StringBuilder();
             for (Pessoa p : comunidade) {
                 sb.append(p.getNome())
@@ -231,7 +230,7 @@ public class ActionsUniversidade {
                         .append(System.lineSeparator());
             }
 
-            return sb.toString().trim(); // remove a última quebra de linha desnecessária
+            return sb.toString().trim(); 
 
         } catch (Exception e) {
             return "ERRO: " + e.getMessage();

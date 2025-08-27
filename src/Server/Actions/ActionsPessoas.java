@@ -120,8 +120,6 @@ public class ActionsPessoas {
     }
 
     // LISTAR TODAS AS PESSOAS
-
-    // LISTAR TODAS AS PESSOAS
     protected String listPessoas(String[] partes) {
         try {
             if (partes.length != 1) {

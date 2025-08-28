@@ -22,12 +22,33 @@ public class ActionsUniversidade {
                 return "Sem universidades cadastradas";
             }
 
+            String message = "";
+
             Long ID = Long.valueOf(partes[1].trim());
             for(Universidade u : universidades){
                 if(u.getID().equals(ID)){
-                    return u.getNome()+";"+u.getNumeroSalas()+";"+u.getCapacidadeAlunos();
+                    message = u.getNome()+";"+u.getNumeroSalas()+";"+u.getCapacidadeAlunos() + "\n";
                 }
+
+                List<Pessoa> comunidade = u.getComunidadeAcademica();
+                if (comunidade.isEmpty()) {
+                    message += "0";
+                }
+
+                StringBuilder sb = new StringBuilder();
+                for (Pessoa p : comunidade) {
+                    sb.append(p.getNome())
+                            .append(" (")
+                            .append(p.getTipo())
+                            .append(")")
+                            .append(System.lineSeparator());
+                }
+
+                message += sb.toString().trim();
+
+                return message;
             }
+
             return "Universidade não encontrada";
 
         }catch (Exception e){
@@ -195,8 +216,6 @@ public class ActionsUniversidade {
 
             return "Pessoa: " + pessoaEncontrada.getNome() + " (" + pessoaEncontrada.getTipo()+ ") faz parte da comunidade academica: "+ universidadeEncontrada.getNome();
 
-
-
         }catch (Exception e){
             return "ERRO: "+ e.getMessage();
         }
@@ -236,8 +255,6 @@ public class ActionsUniversidade {
             return "ERRO: " + e.getMessage();
         }
     }
-
-
 
     // AUX PARA COMUNIDADE ACADEMICA
     private Pessoa buscarPessoaCPF(String cpf){

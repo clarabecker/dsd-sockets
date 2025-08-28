@@ -8,45 +8,19 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.Executor;
 
 public class Server {
-    private static final int PORTA = 8080; // Porta do servidor
-    private static Actions actions = new Actions();
+    private static final int PORTA = 8080;
 
     public static void main(String[] args) {
         try (ServerSocket servidor = new ServerSocket(PORTA)) {
             System.out.println("Servidor iniciado na porta " + PORTA);
 
             while (true) {
-                try (Socket cliente = servidor.accept();
-                     BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-                     PrintWriter saida = new PrintWriter(cliente.getOutputStream(), true)) {
-
-                    System.out.println("Cliente conectado: " + cliente.getInetAddress().getHostAddress());
-
-                    String mensagem;
-                    while ((mensagem = entrada.readLine()) != null) {
-                        if (mensagem.equalsIgnoreCase("sair")) {
-                            break;
-                        }
-
-                        System.out.println("Mensagem recebida: " + mensagem);
-                        String resposta = actions.actionInput(mensagem);
-
-                        String[] linhas = resposta.split("\n");
-                        for (String linha : linhas) {
-                            saida.println(linha);
-                        }
-
-                        saida.println("<<END>>");
-                        saida.flush();
-                    }
-
-                    System.out.println("Cliente desconectado: " + cliente.getInetAddress().getHostAddress());
-
-                } catch (IOException e) {
-                    System.err.println("Erro na comunicação com o cliente: " + e.getMessage());
-                }
+                Socket cliente = servidor.accept();
+                System.out.println("Cliente conectado: " + cliente.getInetAddress().getHostAddress());
+                new Thread(new ClientHandler(cliente)).start();
             }
 
         } catch (IOException e) {

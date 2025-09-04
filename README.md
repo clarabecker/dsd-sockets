@@ -10,15 +10,43 @@ link: https://www.canva.com/design/DAGxGKM1MMk/y_hH-Ndb38BFT3Teqc2LSg/edit?utm_c
 
 # Exemplos de testes:
 
-- **INSERT Pessoa**: INSERT;PROFESSOR;12345678900;João da Silva;Rua B, 123;Matematica
-- **UPDATE Pessoa**: UPDATE;12345678900;Lucas da Silva;Rua B, 123;
-- **GET Pessoa**: GET;12345678900
-- **DELETE Pessoa**: DELETE;12345678900
-- **INSERT Universidade**: INSERT_UNI;123;UDESC;25;500
-- **UPDATE Universidade**: UPDATE_UNI;123;IFC;20;400;
-- **GET Universidade**: GET_UNI;123
-- **DELETE Universidade**: DELETE_UNI;123
-- **ADD PESSOA NA UNIVERSIDADE**: ADD_PESSOA_UNI;123;12345678900
-- **REMOVE PESSOA NA UNIVERSIDADE**: REMOVE_PESSOA_UNI;123;12345678900
-- **GET PESSOA NA UNIVERSIDADE**: GET_PESSOA_UNI;123;12345678900
-- **LIST PESSOA UNIVERSIDADE**: LIST_PESSOA_UNI;123
+===== MENU =====
+1 - Inserir Pessoa
+2 - Atualizar Pessoa
+3 - Consultar Pessoa
+4 - Remover Pessoa
+5 - Listar Pessoas
+6 - Inserir Universidade
+7 - Consultar Universidade
+8 - Listar Pessoas em Universidade
+9 - Deletar Universidade
+10 - Adicionar Pessoa em Universidade
+11 - Remover Pessoa de Universidade
+12 - Consultar Pessoa em Universidade
+13 - Sair
+
+**INSERÇÃO PROFESSOR:** 
+1
+PROFESSOR;12345678900;João da Silva;Rua B, 123;Matematica
+
+**INSERÇÃO ESTUDANTE:** 
+1
+ESTUDANTE;12345678911;Renata da Silva;Rua B, 123;44444444
+
+**ATUALIZAÇÃO PESSOA:**
+2
+12345678900;João da Silva;Rua B, 123;Português
+
+**CONSULTA PESSOA:**
+3
+12345678900
+
+**INSERÇÃO UNIVERSIDADE:**
+6
+123;UDESC;25;500
+
+**ADICIONAR PESSOA NA UNIVERSIDADE:**
+10
+123;12345678900
+10
+123;12345678911

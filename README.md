@@ -11,19 +11,19 @@ link: https://www.canva.com/design/DAGxGKM1MMk/y_hH-Ndb38BFT3Teqc2LSg/edit?utm_c
 # Exemplos de testes:
 
 ===== MENU =====
-1 - Inserir Pessoa
-2 - Atualizar Pessoa
-3 - Consultar Pessoa
-4 - Remover Pessoa
-5 - Listar Pessoas
-6 - Inserir Universidade
-7 - Consultar Universidade
-8 - Listar Pessoas em Universidade
-9 - Deletar Universidade
-10 - Adicionar Pessoa em Universidade
-11 - Remover Pessoa de Universidade
-12 - Consultar Pessoa em Universidade
-13 - Sair
+- 1 - Inserir Pessoa
+- 2 - Atualizar Pessoa
+- 3 - Consultar Pessoa
+- 4 - Remover Pessoa
+- 5 - Listar Pessoas
+- 6 - Inserir Universidade
+- 7 - Consultar Universidade
+- 8 - Listar Pessoas em Universidade
+- 9 - Deletar Universidade
+- 10 - Adicionar Pessoa em Universidade
+- 11 - Remover Pessoa de Universidade
+- 12 - Consultar Pessoa em Universidade
+- 13 - Sair
 
 **INSERÇÃO PROFESSOR:** 
 1
